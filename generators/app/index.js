@@ -1,40 +1,57 @@
 'use strict';
+
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+
+var utils = require('../../utils');
 
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-    // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the super ' + chalk.red('generator-ngpack') + ' generator!'
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
+      type: 'input',
+      name: 'name',
+      message: 'What would you like to name your app?',
+      default: this.appname
     }];
 
     this.prompt(prompts, function (props) {
       this.props = props;
-      // To access props later use this.props.someOption;
-
       done();
     }.bind(this));
   },
 
   writing: function () {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
+    var files = utils.getFiles(__dirname + '/templates');
+    files.forEach(function (file) {
+      var path = file.split('templates/')[1];
+      if (path.match(/png/)) {
+        this.fs.copy(
+          this.templatePath(path),
+          this.destinationPath(path)
+        );
+      }
+      else {
+        this.fs.copyTpl(
+          this.templatePath(path),
+          this.destinationPath(path),
+          {
+            name: this.props.name || null,
+            license: this.props.license || null,
+            repository: this.props.repository || null
+          }
+        );
+      }
+    }.bind(this));
   },
 
   install: function () {
-    this.installDependencies();
+    //this.installDependencies();
   }
 });
