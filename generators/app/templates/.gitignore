@@ -1,0 +1,18 @@
+# Logs
+logs
+*.log
+
+# Build Directory
+dist/
+build/
+
+# Dependency directories
+node_modules/
+../app/bower_components/
+
+# Temporary Directories
+.sass-cache
+.tmp
+
+# IDE directory
+.idea/

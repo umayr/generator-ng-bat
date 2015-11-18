@@ -1,0 +1,38 @@
+{
+  "name": "<%= name %>",
+  "version": "0.0.0",
+<% if (repository) { %>
+  "repository": "<%= repository %>",
+<% } %>
+<% if (license) { %>
+  "license": "<%= license %>",
+<% } %>
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server --inline --debug --devtool eval --hot --content-base app",
+    "lint": "./node_modules/.bin/eslint --config ./.eslintrc ./app || true",
+    "build": "./node_modules/.bin/webpack --optimize-minimize --optimize-occurence-order --progress"
+  },
+  "devDependencies": {
+    "css-loader": "0.15.3",
+    "eslint": "^1.9.0",
+    "eslint-config-angular": "^0.4.0",
+    "eslint-plugin-angular": "^0.13.0",
+    "html-loader": "^0.3.0",
+    "html-webpack-plugin": "^1.6.2",
+    "ng-annotate-loader": "0.0.6",
+    "node-sass": "3.3.3",
+    "sass-loader": "2.0.1",
+    "style-loader": "0.12.3",
+    "webpack": "1.10.1",
+    "webpack-dev-server": "1.10.1"
+  },
+  "dependencies": {
+    "angular": "^1.4.2",
+    "angular-ui-router": "^0.2.15",
+    "bootstrap-sass": "^3.3.5",
+    "file-loader": "^0.8.4",
+    "lodash": "^3.10.1",
+    "restangular": "^1.5.1",
+    "url-loader": "^0.5.6"
+  }
+}
