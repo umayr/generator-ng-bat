@@ -12,7 +12,7 @@ module.exports = yeoman.generators.Base.extend({
     var done = this.async();
 
     this.log(yosay(
-      'Welcome to the super ' + chalk.red('generator-ngpack') + ' generator!'
+      'Welcome to the super ' + chalk.red('generator-ng-bat') + ' generator!'
     ));
 
     var prompts = [{

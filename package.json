@@ -1,8 +1,8 @@
 {
-  "name": "generator-ngpack",
+  "name": "generator-ng-bat",
   "version": "0.0.0",
   "description": "Generator to bootstrap Angular 1.x apps powered by webpack",
-  "homepage": "https://github.com/umayr/generator-ngpack",
+  "homepage": "https://github.com/umayr/generator-ng-bat",
   "author": {
     "name": "Umayr Shahid",
     "email": "umayrr@hotmail.co.uk",
@@ -31,7 +31,7 @@
     "gulp-plumber": "^1.0.0",
     "gulp-nsp": "^2.1.0"
   },
-  "repository": "git@github.com:umayr/generator-ngpack.git",
+  "repository": "git@github.com:umayr/generator-ng-bat.git",
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp"
