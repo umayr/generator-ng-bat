@@ -1,5 +1,4 @@
-generators/app/templates/
-generators/feature/templates/
+generators/**/templates/
 
 node_modules/
 coverage/
