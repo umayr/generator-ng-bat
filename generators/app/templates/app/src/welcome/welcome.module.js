@@ -2,7 +2,7 @@
 
 require('./welcome.scss');
 
-var name = module.exports = 'app.welcome';
+var name = module.exports = '<%= name %>.welcome';
 
 angular
   .module(name, [])

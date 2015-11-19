@@ -2,6 +2,6 @@
 
 require('./common.scss');
 
-var name = module.exports = 'app.common';
+var name = module.exports = '<%= name %>.common';
 
 angular.module(name, []);
