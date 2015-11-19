@@ -18,5 +18,4 @@ function configuration($stateProvider) {
       controller: '<%= controller %> as vm',
       title: 'Welcome to Wayne Minor.'
     });
-
 }

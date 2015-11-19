@@ -2,7 +2,6 @@
 
 var yeoman = require('yeoman-generator');
 var _ = require('lodash');
-var fs = require('fs');
 var path = require('path');
 
 var format = require('util').format;
