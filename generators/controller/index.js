@@ -16,13 +16,6 @@ module.exports = yeoman.generators.Base.extend({
       process.exit(1);
     };
 
-    try {
-      this.props.package = require(path.join(this.destinationRoot(), './package.json'));
-    }
-    catch (e) {
-      this.throwError(e.message);
-    }
-
     this.props.root = path.join(this.destinationRoot(), './app/src');
 
     var raw = this.args[0];
