@@ -1,40 +1,72 @@
 'use strict';
+
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
+var _ = require('lodash');
+var path = require('path');
+
+var format = require('util').format;
+var write = require('html-wiring').writeFileFromString;
+
 
 module.exports = yeoman.generators.Base.extend({
-  prompting: function () {
-    var done = this.async();
+  initializing: function () {
+    this.props = {};
 
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the magnificent ' + chalk.red('generator-ng-bat') + ' generator!'
-    ));
+    this.throwError = function (message) {
+      this.log.error(message);
+      process.exit(1);
+    };
 
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+    this.props.root = path.join(this.destinationRoot(), './app/src');
 
-    this.prompt(prompts, function (props) {
-      this.props = props;
-      // To access props later use this.props.someOption;
+    var raw = this.args[0];
 
-      done();
-    }.bind(this));
+    if (raw.indexOf('.') === -1)
+      this.throwError('First argument should be module name and factory name separated by a dot.');
+
+    this.props.feature = raw.split('.')[0];
+    this.props.name = _.deburr(raw.split('.')[1]);
+
+    if (_.isEmpty(this.props.feature) || _.isEmpty(this.props.name))
+      this.throwError('Feature and/or factory name can\'t be empty.');
+
+    this.props.factory = _.camelCase(this.props.name);
+
   },
-
   writing: function () {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
-  },
 
-  install: function () {
-    this.installDependencies();
+    this.fs.copy(
+      this.templatePath('factory.js'),
+      this.destinationPath(format('%s/%s/%s.factory.js', this.props.root, this.props.feature, this.props.factory))
+    );
+
+    var modulePath = path.join(this.props.root, format('./%s/%s.module.js', this.props.feature, this.props.feature));
+
+    if (!this.fs.exists(modulePath))
+      throw new Error('Can\'t find module file for provided feature');
+
+    var file = this.fs.read(modulePath);
+
+    var lines = file.split('\n');
+    var cursor = _.findIndex(lines, function (value) {
+      return value === 'angular';
+    });
+
+    var top = _.slice(lines, 0, cursor);
+    var focus = _.slice(lines, cursor);
+
+    cursor = _.findIndex(focus, function (value) {
+      return value === ';';
+    });
+
+    var bottom = _.slice(focus, cursor);
+    focus = _.slice(focus, 0, cursor);
+
+    focus.push(format('  .factory(\'%s\', require(\'./%s.factory.js\'))', this.props.factory, this.props.factory));
+
+    lines = top.concat(focus).concat(bottom);
+    file = lines.join('\n');
+
+    write(file, modulePath);
   }
 });
