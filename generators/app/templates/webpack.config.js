@@ -10,7 +10,7 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  context: __dirname + '/app',
+  context: path.join(__dirname, '/app'),
   entry: {
     app: [
       'webpack/hot/dev-server',
@@ -18,7 +18,7 @@ module.exports = {
     ]
   },
   output: {
-    path: __dirname + '/build',
+    path: path.join(__dirname, '/build'),
     filename: 'bundle.js',
     publicPath: '/'
   },
