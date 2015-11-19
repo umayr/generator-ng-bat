@@ -36,7 +36,7 @@
   "repository": "git@github.com:umayr/generator-ng-bat.git",
   "scripts": {
     "prepublish": "gulp prepublish",
-    "lint": "./node_modules/.bin/eslint --config ./.eslintrc . || true",
+    "lint": "./node_modules/.bin/eslint . || true",
     "test": "npm run lint && gulp"
   },
   "license": "MIT"
