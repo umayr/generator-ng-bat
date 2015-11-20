@@ -34,7 +34,6 @@ utils.getFiles = function getFiles(dir, files) {
  * Method to inject the newly created feature into the main app.module.js
  */
 utils.injectFeature = function injectFeature() {
-  console.log(this.constructor.name);
   var modulePath = path.join(this.props.root, './app.module.js');
 
   if (!this.fs.exists(modulePath))
