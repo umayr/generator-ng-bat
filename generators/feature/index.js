@@ -5,7 +5,8 @@ var _ = require('lodash');
 var path = require('path');
 
 var format = require('util').format;
-var write = require('html-wiring').writeFileFromString;
+
+var utils = require('../../utils');
 
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
@@ -53,28 +54,6 @@ module.exports = yeoman.generators.Base.extend({
       }
     );
 
-    var modulePath = path.join(this.props.root, './app.module.js');
-
-    if (!this.fs.exists(modulePath))
-      throw new Error('Can\'t find app.module.js');
-
-    var file = this.fs.read(modulePath);
-
-    var lines = file.split('\n');
-    var cursor = _.findLastIndex(lines, function (value) {
-      return _.contains(value, ']);');
-    });
-
-
-    var top = _.slice(lines, 0, cursor);
-    var bottom = _.slice(lines, cursor);
-
-    top[cursor - 1] += ',';
-    top.push(format('  require(\'./%s/%s.module.js\')', this.props.feature, this.props.feature));
-
-    lines = top.concat(bottom);
-    file = lines.join('\n');
-
-    write(file, modulePath);
+    utils.injectFeature.call(this);
   }
 });

@@ -5,8 +5,8 @@ var _ = require('lodash');
 var path = require('path');
 
 var format = require('util').format;
-var write = require('html-wiring').writeFileFromString;
 
+var utils = require('../../utils');
 
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
@@ -48,33 +48,12 @@ module.exports = yeoman.generators.Base.extend({
         }
       );
 
-    var modulePath = path.join(this.props.root, format('./%s/%s.module.js', this.props.feature, this.props.feature));
-
-    if (!this.fs.exists(modulePath))
-      throw new Error('Can\'t find module file for provided feature');
-
-    var file = this.fs.read(modulePath);
-
-    var lines = file.split('\n');
-    var cursor = _.findIndex(lines, function (value) {
-      return value === 'angular';
-    });
-
-    var top = _.slice(lines, 0, cursor);
-    var focus = _.slice(lines, cursor);
-
-    cursor = _.findIndex(focus, function (value) {
-      return value === ';';
-    });
-
-    var bottom = _.slice(focus, cursor);
-    focus = _.slice(focus, 0, cursor);
-
-    focus.push(format('  .controller(\'%s\', require(\'./%s.controller.js\'))', this.props.controller, this.props.name));
-
-    lines = top.concat(focus).concat(bottom);
-    file = lines.join('\n');
-
-    write(file, modulePath);
+    utils.injectComponent.call(this,
+      format(
+        '  .controller(\'%s\', require(\'./%s.controller.js\'))',
+        this.props.controller,
+        this.props.name
+      )
+    );
   }
 });

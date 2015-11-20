@@ -5,8 +5,8 @@ var _ = require('lodash');
 var path = require('path');
 
 var format = require('util').format;
-var write = require('html-wiring').writeFileFromString;
 
+var utils = require('../../utils');
 
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
@@ -40,33 +40,12 @@ module.exports = yeoman.generators.Base.extend({
       this.destinationPath(format('%s/%s/%s.directive.js', this.props.root, this.props.feature, this.props.directive))
     );
 
-    var modulePath = path.join(this.props.root, format('./%s/%s.module.js', this.props.feature, this.props.feature));
-
-    if (!this.fs.exists(modulePath))
-      throw new Error('Can\'t find module file for provided feature');
-
-    var file = this.fs.read(modulePath);
-
-    var lines = file.split('\n');
-    var cursor = _.findIndex(lines, function (value) {
-      return value === 'angular';
-    });
-
-    var top = _.slice(lines, 0, cursor);
-    var focus = _.slice(lines, cursor);
-
-    cursor = _.findIndex(focus, function (value) {
-      return value === ';';
-    });
-
-    var bottom = _.slice(focus, cursor);
-    focus = _.slice(focus, 0, cursor);
-
-    focus.push(format('  .directive(\'%s\', require(\'./%s.directive.js\'))', this.props.directive, this.props.directive));
-
-    lines = top.concat(focus).concat(bottom);
-    file = lines.join('\n');
-
-    write(file, modulePath);
+    utils.injectComponent.call(this,
+      format(
+        '  .directive(\'%s\', require(\'./%s.directive.js\'))',
+        this.props.directive,
+        this.props.directive
+      )
+    );
   }
 });
