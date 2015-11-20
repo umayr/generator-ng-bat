@@ -1,0 +1,5 @@
+generators/**/templates/
+
+node_modules/
+coverage/
+test/
