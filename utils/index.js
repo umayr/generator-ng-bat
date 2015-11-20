@@ -7,15 +7,11 @@ var fs = require('fs');
 
 exports.getFiles = function getFiles(dir, files) {
   files = files || [];
-  var _files = fs.readdirSync(dir);
-  for (var i in _files) {
-    var name = dir + '/' + _files[i];
-    if (fs.statSync(name).isDirectory()) {
-      getFiles(name, files);
-    }
-    else {
-      files.push(name);
-    }
+  var tmp = fs.readdirSync(dir);
+  for (var i in tmp) {
+    var name = dir + '/' + tmp[i];
+    if (fs.statSync(name).isDirectory()) getFiles(name, files);
+    else files.push(name);
   }
   return files;
 };

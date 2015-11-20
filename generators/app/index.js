@@ -44,7 +44,7 @@ module.exports = yeoman.generators.Base.extend({
       name: 'repository',
       message: 'URL to remote repository?',
       default: function (answers) {
-        return answers.username ? 'https://github.com/' + answers.username + '/' + answers.name : null
+        return answers.username ? 'https://github.com/' + answers.username + '/' + answers.name : null;
       }
     }];
 
@@ -58,13 +58,12 @@ module.exports = yeoman.generators.Base.extend({
     var files = utils.getFiles(__dirname + '/templates');
     files.forEach(function (file) {
       var path = file.split('templates/')[1];
-      if (path.match(/png|jpe?g|gif/)) {
+      if (path.match(/png|jpe?g|gif/))
         this.fs.copy(
           this.templatePath(path),
           this.destinationPath(path)
         );
-      }
-      else {
+      else
         this.fs.copyTpl(
           this.templatePath(path),
           this.destinationPath(path),
@@ -74,7 +73,6 @@ module.exports = yeoman.generators.Base.extend({
             repository: this.props.repository || null
           }
         );
-      }
     }.bind(this));
   },
 
