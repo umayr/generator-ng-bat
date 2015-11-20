@@ -1,4 +1,4 @@
-# `generator-ng-bat`
+# `generator-ng-bat` [![Build Status](https://travis-ci.org/umayr/generator-ng-bat.svg?branch=master)](https://travis-ci.org/umayr/generator-ng-bat)
 > Yet another minimal generator for Angular 1.x powered by Webpack.
 
 ### Usage
