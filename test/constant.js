@@ -4,7 +4,7 @@ var fs = require('fs-extra');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 
-describe('generator-ng-bat:constant', function () {
+xdescribe('generator-ng-bat:constant', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/constant'))
       .withArguments(['common.constant'])

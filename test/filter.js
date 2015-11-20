@@ -3,7 +3,7 @@ var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 
-describe('generator-ng-bat:filter', function () {
+xdescribe('generator-ng-bat:filter', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/filter'))
       .withOptions({someOption: true})
