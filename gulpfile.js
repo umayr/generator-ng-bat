@@ -1,4 +1,5 @@
 'use strict';
+
 var path = require('path');
 var gulp = require('gulp');
 var eslint = require('gulp-eslint');
@@ -44,4 +45,5 @@ gulp.task('test', ['pre-test'], function (cb) {
 });
 
 gulp.task('prepublish', ['nsp']);
+
 gulp.task('default', ['static', 'test']);
