@@ -1,0 +1,5 @@
+generators/app/templates/
+generators/feature/templates/
+
+node_modules/
+test/
