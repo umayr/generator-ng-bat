@@ -5,7 +5,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var _ = require('lodash');
 
-var utils = require('../../utils');
+var utils = require('../_utils');
 
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {

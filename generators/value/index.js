@@ -6,7 +6,7 @@ var path = require('path');
 
 var format = require('util').format;
 
-var utils = require('../../utils');
+var utils = require('../_utils');
 
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
