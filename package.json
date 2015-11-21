@@ -1,6 +1,6 @@
 {
   "name": "generator-ng-bat",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Generator to bootstrap Angular 1.x apps powered by webpack",
   "homepage": "https://github.com/umayr/generator-ng-bat",
   "author": {
