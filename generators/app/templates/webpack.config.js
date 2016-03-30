@@ -1,7 +1,3 @@
-/**
- * Created by Umayr Shahid on 10/27/2015.
- */
-
 'use strict';
 
 var webpack = require('webpack');
@@ -73,7 +69,7 @@ module.exports = {
       __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
     }),
     new HtmlWebpackPlugin({
-      template: './app/index.html'
+      template: './index.html'
     })
   ]
 };
