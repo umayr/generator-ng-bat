@@ -73,7 +73,7 @@ module.exports = {
       __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
     }),
     new HtmlWebpackPlugin({
-      template: './app/index.html'
+      template: './index.html'
     })
   ]
 };
