@@ -1,7 +1,3 @@
-/**
- * Created by Umayr Shahid on 10/27/2015.
- */
-
 'use strict';
 
 var webpack = require('webpack');
